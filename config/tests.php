@@ -45,10 +45,10 @@ return [
 			'Тип дороги' => 'c_road_type',
 			'Последнее обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
-			'Скорость от A к B' => function($segment){
+			'км/ч A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
-			'Скорость от B к A' => function($segment){
+			'км/ч B->A' => function($segment){
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
 		],
@@ -127,10 +127,10 @@ return [
 			'Тип дороги' => 'c_road_type',
 			'Последнее обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
-			'Скорость от A к B' => function($segment){
+			'км/ч A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
-			'Скорость от B к A' => function($segment){
+			'км/ч B->A' => function($segment){
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
 		],
