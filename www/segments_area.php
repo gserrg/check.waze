@@ -58,7 +58,8 @@
 					<!--main-->
 					<div class="page-header">
 						<h3><?= $area_name[0]['name'] ?></h3>
-						<div id="accordion" class="panel-group" role="tablist" aria-multiselecttable="true"></div>
+					</div>
+					<div id="accordion" class="panel-group" role="tablist" aria-multiselecttable="true">
 						<?= $tests->display($area_id) ?>
 					</div>
 					<!--endmain-->
