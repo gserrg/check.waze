@@ -1,19 +1,17 @@
 {
-	"name": "Nayada",
+	"name": "check.waze",
 	"version": "1.0.0",
-	"description": "SCSS сборщик",
-	"author": "WebTechart",
+	"description": "Веб-морда check.waze.su",
+	"author": "gserrg",
 	"license": "ISC",
 	"repository": {
 		"type": "git",
 		"url": ""
 	},
 	"dependencies": {
-		"gulp": "github:gulpjs/gulp#4.0",
-		"gulp-sass": "latest"
+		"gulp": "github:gulpjs/gulp#4.0"
 	},
 	"devDependencies": {
-		"browser-sync": "^2.11.1",
 		"gulp": "github:gulpjs/gulp#4.0",
 		"gulp-livereload": "^3.8.1"
 	}
