@@ -8,6 +8,6 @@
 			. '&segments='. $segment['id'] . '" target="WME">' . Waze\RoadsHelper::instance()->name($segment) . '</a>';
 		},
 		'c_editor' => function($segment) {
-			return $segment['username'] . ' (' . $segment['rank'] . ')';
+			return $segment['u_username'] . ' (' . $segment['u_rank'] . ')';
 		},
 	];

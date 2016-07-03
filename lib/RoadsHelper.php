@@ -71,20 +71,18 @@ class RoadsHelper
 		if ($data['street_id'] == 0) {
 			return 'Безымянный (' . $data['id'] . ')';
 		}
-		$street_info = $this->db->as_array('SELECT * FROM streets where streets.id = ' . $data['street_id']);
-		if (empty($street_info['name']) || $street_info['isempty'] == false) {
+		if (empty($data['str_name']) || $data['str_name'] == false) {
 			$street = 'Без улицы';
 		} else {
-			$street = $street_info['name'];
+			$street = $data['str_name'];
 		}
-		if (empty($street_info['city_id'])) {
+		if (empty($data['str_city_id'])) {
 			$city = 'без города';
 		} else {
-			$city_info = $this->db->as_array('select cities.name, cities.isempty FROM cities WHERE cities.id = ' . $street_info['city_id']);
-			if (empty($city_info['name']) || $city_info['isempty'] == false) {
+			if (empty($data['c_name']) || $data['c_isempty'] == false) {
 				$city = 'без города';
 			} else {
-				$city = $city_info['name'];
+				$city = $data['c_name'];
 			}
 		}
 		return $street . ', ' . $city;
