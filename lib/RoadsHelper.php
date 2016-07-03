@@ -69,7 +69,7 @@ class RoadsHelper
 	public function name($data)
 	{
 		if ($data['street_id'] == 0) {
-			return 'Безымянный';
+			return 'Безымянный (' . $data['id'] . ')';
 		}
 		$street_info = $this->db->as_array('SELECT * FROM streets where streets.id = ' . $data['street_id']);
 		if (empty($street_info['name']) || $street_info['isempty'] == false) {
