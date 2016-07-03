@@ -44,6 +44,16 @@ return [
 			'Тип дороги' => 'c_road_type',
 		],
 	],
+	'bad_level' => [
+		'title' => 'Некорректное возвышение',
+		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.level FROM segments AS s
+		WHERE (s.level < -3 or s.level > 3) and area_id = :area_id ORDER BY s.city_id LIMIT 1000',
+		'fields' => [
+			'Возвышение' => 'level',
+			'Расположение сегмента' => 'c_link',
+			'Тип дороги' => 'c_road_type',
+		],
+	],
 	'no_name' => [
 		'title' => 'Неподтвержденные сегменты',
 		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, users.username, users.rank FROM segments AS s
@@ -55,5 +65,5 @@ return [
 			'Последнее обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
-	]
+	],
 ];
