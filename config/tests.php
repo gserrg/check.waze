@@ -125,4 +125,18 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
+	'ring' => [
+		'title' => 'Кольца с названием',
+		'sql' => "SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, u.username as u_username, u.rank as u_rank
+			,str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
+			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
+			LEFT JOIN users as u on(u.id = s.last_edit_by)
+			WHERE ((str.name <> '' OR s.alt_names = TRUE) AND s.roundabout = TRUE) and area_id = :area_id ORDER BY s.city_id LIMIT 2000",
+		'fields' => [
+			'Расположение сегмента' => 'c_link',
+			'Тип дороги' => 'c_road_type',
+			'Последнее обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
+	],
 ];
