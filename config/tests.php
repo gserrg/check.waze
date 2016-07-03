@@ -34,5 +34,14 @@ return [
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
 		],
+	],
+	'no_speed' => [
+		'title' => 'Важные дороги без скоростей',
+		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection FROM segments AS s
+		WHERE (roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed is null) or (revdirection and revmaxspeed is null))) and area_id = :area_id ORDER BY s.city_id LIMIT 1000',
+		'fields' => [
+			'Расположение сегмента' => 'c_link',
+			'Тип дороги' => 'c_road_type',
+		],
 	]
 ];
