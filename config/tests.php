@@ -94,11 +94,11 @@ return [
 	],
 	'wrong_speed' => [
 		'title' => 'Важные сегменты вне НП со скоростью 60км/ч',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, u.username as u_username, u.rank as u_rank
+		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection, s.last_edit_on, u.username as u_username, u.rank as u_rank
 			,str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
 			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
 			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty=TRUE) and area_id = :area_id ORDER BY s.city_id LIMIT 2000',
+			WHERE (roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty = TRUE) and area_id = :area_id ORDER BY s.city_id LIMIT 2000',
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
