@@ -43,5 +43,17 @@ return [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
 		],
+	],
+	'no_name' => [
+		'title' => 'Неподтвержденные сегменты',
+		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, users.username, users.rank FROM segments AS s
+		LEFT JOIN users on(users.id = s.last_edit_by)
+		WHERE (street_id is null) and area_id = :area_id ORDER BY s.city_id LIMIT 1000',
+		'fields' => [
+			'Расположение сегмента' => 'c_link',
+			'Тип дороги' => 'c_road_type',
+			'Последнее обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
 	]
 ];
