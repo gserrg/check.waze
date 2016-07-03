@@ -69,7 +69,7 @@
 										</div>
 										<div class="panel-body">
 											<div class="text-right">
-												Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', $area['updated_at']) ?>
+												Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', strtotime($area['updated_at'])) ?>
 											</div>
 										</div>
 										<ul class="list-group">
