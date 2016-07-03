@@ -1,0 +1,48 @@
+<?php
+	/**
+	 * @var array      $list
+	 * @var string     $name
+	 * @var string     $title
+	 * @var string[]   $fields
+	 * @var callable[] $templates
+	 */
+?>
+<div class="panel panel-default">
+	<div id="<?= $name ?>>" class="panel-heading" role="tab">
+		<h4 class="panel-title">
+			<a href="#<?= $name ?>-body" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="<?= $name ?>-body">
+				<?= $title ?>
+			</a>
+			<span class="badge"><?= count($list) ?></span>
+		</h4>
+	</div>
+	<div id="<?= $name ?>-body" class="panel-collapse collapse" role="tabpanel" arialabelledby="<?= $name ?>">
+		<table class="table table-condensed table-hover">
+			<thead>
+			<tr>
+				<?php foreach ($fields as $f_title => $field) { ?>
+					<th><?= $f_title ?></th>
+				<?php } ?>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($list as $segment) { ?>
+				<tr>
+					<?php foreach ($fields as $field) { ?>
+						<?php if (is_callable($field)) { ?>
+							<td><?= call_user_func($field, $segment) ?></td>
+						<?php } else if(isset($templates[$field])) { ?>
+							<td><?= call_user_func($templates[$field], $segment) ?></td>
+						<?php } else { ?>
+							<td><?= $segment[$field] ?></td>
+						<?php } ?>
+					<?php } ?>
+				</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+		<?php
+			//- @area.segments.lock_level(@editor_level).drivable.disconnected.order('dc_density desc').each do |segment|
+		?>
+	</div>
+</div>

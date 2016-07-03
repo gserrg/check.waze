@@ -1,0 +1,20 @@
+{
+	"name": "Nayada",
+	"version": "1.0.0",
+	"description": "SCSS сборщик",
+	"author": "WebTechart",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"dependencies": {
+		"gulp": "github:gulpjs/gulp#4.0",
+		"gulp-sass": "latest"
+	},
+	"devDependencies": {
+		"browser-sync": "^2.11.1",
+		"gulp": "github:gulpjs/gulp#4.0",
+		"gulp-livereload": "^3.8.1"
+	}
+}
