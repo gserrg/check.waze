@@ -23,7 +23,7 @@ class TestsFactory
 			if (isset($config['sql'], $config['fields'])) {
 				$sql = str_replace(':area_id' , $area, $config['sql']);
 				$list = $this->db->as_array($sql);
-				if (count($list)) {
+				if ($list !== false && count($list)) {
 					$params = $config;
 					unset($params['sql']);
 					$params['list'] = $list;
