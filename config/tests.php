@@ -121,7 +121,6 @@ return [
 			WHERE (roadtype = 18 and (str.name <> '' OR c.name <> '' OR s.alt_names = TRUE)) and area_id = :area_id ORDER BY s.city_id LIMIT 2000",
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
-			'Тип дороги' => 'c_road_type',
 			'Последнее обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
