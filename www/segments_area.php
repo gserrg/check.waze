@@ -9,7 +9,7 @@
 	}
 	preg_match('(\d+)', $_GET['area'], $m);
 	$area_id = reset($m);
-	$nav = array('/waze/' => 'Главная страница');
+	$nav = array('/' => 'Главная страница');
 	$road = Waze\RoadsHelper::instance();
 	$db = Waze\DB::instance();
 	$tests = new Waze\TestsFactory();
@@ -71,7 +71,7 @@
 		<div class="row">
 			<div class="col-sm-0 col-md-3 col-lg-3">&nbsp;</div>
 			<div class="col-sm-12 col-md-3 col-lg-3">
-				<a href="/options" class="text-right">Настройки</a>
+				<!--<a href="/options" class="text-right">Настройки</a>-->
 			</div>
 		</div>
 	</footer>

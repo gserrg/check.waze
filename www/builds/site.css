@@ -2,10 +2,12 @@ body {
 	padding-top: 65px;
 }
 .sort {
+	height: 20px;
+	width: 20px;
 }
 .sort.asc:after {
-	content: ' v';
+	content: 'v';
 }
 .sort.desc:after {
-	content: ' ^';
+	content: '^';
 }
