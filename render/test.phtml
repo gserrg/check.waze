@@ -15,25 +15,33 @@
 		</h4>
 	</div>
 	<div id="<?= $name ?>-body" class="panel-collapse collapse" role="tabpanel" arialabelledby="<?= $name ?>">
+		<input class="search form-control" placeholder="Поиск" />
 		<table class="table table-condensed table-hover">
 			<thead>
+			<?php
+				$i = 0;
+			?>
 			<tr>
 				<?php foreach ($fields as $f_title => $field) { ?>
-					<th><?= $f_title ?></th>
+					<th>
+						<?php if(++$i > 1) { ?>
+							<button class="sort btn btn-info btn-xs" data-sort="filter-<?= $i ?>"></button>
+						<?php } ?>
+						<?= $f_title ?>
+					</th>
 				<?php } ?>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody class="list">
 			<?php foreach ($list as $segment) { ?>
+				<?php
+					$i = 0;
+				?>
 				<tr>
 					<?php foreach ($fields as $field) { ?>
-						<?php if (is_callable($field)) { ?>
-							<td><?= call_user_func($field, $segment) ?></td>
-						<?php } else if(isset($templates[$field])) { ?>
-							<td><?= call_user_func($templates[$field], $segment) ?></td>
-						<?php } else { ?>
-							<td><?= $segment[$field] ?></td>
-						<?php } ?>
+						<td class="filter-<?= ++$i ?>">
+							<?= is_callable($field) ? call_user_func($field, $segment) : (isset($templates[$field]) ? call_user_func($templates[$field], $segment) : $segment[$field]) ?>
+						</td>
 					<?php } ?>
 				</tr>
 			<?php } ?>

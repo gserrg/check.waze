@@ -76,6 +76,8 @@
 		</div>
 	</footer>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
 	<script src="builds/bootstrap.min.js" data-turbolinks-track="true"></script>
+	<script src="builds/filter.js"></script>
 </body>
 </html>

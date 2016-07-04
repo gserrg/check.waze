@@ -7,7 +7,8 @@ return [
 			'where' => 'connected = false and roadtype NOT IN (18,10,5,19,16)',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Вес' => 'dc_density',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -21,7 +22,8 @@ return [
 			'where' => '(roadtype=2 and coalesce(lock,0) < 2) or (roadtype=7 and coalesce(lock,0) < 3) or (roadtype in (3,4,6) and coalesce(lock,0) < 4)',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Уровень блокировки' => 'lock',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -35,7 +37,8 @@ return [
 			'where' => '(fwddirection and fwdmaxspeedunverified) or (revdirection and revmaxspeedunverified)',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'км/ч A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
@@ -54,7 +57,8 @@ return [
 			'where' => 'roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed is null) or (revdirection and revmaxspeed is null))',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -67,7 +71,8 @@ return [
 			'where' => 's.level < -3 or s.level > 3',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Возвышение' => 'level',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -80,7 +85,8 @@ return [
 			'where' => 'street_id is null',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -92,7 +98,8 @@ return [
 			'where' => 'str.isempty = TRUE and s.alt_names = FALSE AND roadtype in (3,6,7) AND roundabout = FALSE',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -105,7 +112,8 @@ return [
 			'where' => 'roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty = TRUE',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
 			'км/ч A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
@@ -123,7 +131,8 @@ return [
 			'where' => 'roadtype = 18 and (str.name <> \'\' OR c.name <> \'\' OR s.alt_names = TRUE)',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
@@ -134,7 +143,8 @@ return [
 			'where' => '(str.name <> \'\' OR s.alt_names = TRUE) AND s.roundabout = TRUE',
 		],
 		'fields' => [
-			'Сегмент' => 'c_link',
+			'' => 'c_link',
+			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
