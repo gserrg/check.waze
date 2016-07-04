@@ -48,4 +48,15 @@ class DB
 			.' WHERE ' . $where . ' area_id = ' . $area_id . ' ORDER BY ' . $order . ' LIMIT ' . $limit;
 		return $this->as_array($query);
 	}
+
+	public function get_segments_count($params, $area_id) {
+		$join = isset($params['join']) ? $params['join'] : '';
+		$where = isset($params['where']) ? '(' . $params['where'] . ') AND ' : '';
+		$query = 'SELECT count(*) ' . ' FROM segments AS s '
+			. 'LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id) LEFT JOIN users as u on(u.id = s.last_edit_by) ' . $join
+			.' WHERE ' . $where . ' area_id = ' . $area_id;
+		$list = $this->as_array($query);
+		$list = reset($list);
+		return reset($list);
+	}
 }

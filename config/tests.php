@@ -1,7 +1,7 @@
 <?php
 return [
 	'disconnected' => [
-		'title' => 'Сегменты не подсоединены <small>или нет разрешенных поворотов</small>',
+		'title' => '<span title="Или нет разрешенных поворотов">Сегменты не подсоединены</span>',
 		'sql' => [
 			'columns' => 's.street_id, s.dc_density',
 			'where' => 'connected = false and roadtype NOT IN (18,10,5,19,16)',
@@ -106,7 +106,7 @@ return [
 		],
 	],
 	'wrong_speed' => [
-		'title' => 'Важные сегменты вне НП со скоростью 60км/ч',
+		'title' => 'Важные сегменты вне НП с 60км/ч',
 		'sql' => [
 			'columns' => 's.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection',
 			'where' => 'roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty = TRUE',

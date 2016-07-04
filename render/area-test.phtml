@@ -14,7 +14,7 @@
 			<span class="badge"><?= count($list) ?></span>
 		</h4>
 	</div>
-	<div id="<?= $name ?>-body" class="panel-collapse collapse" role="tabpanel" arialabelledby="<?= $name ?>">
+	<div id="<?= $name ?>-body" class="panel-collapse collapse" role="tabpanel">
 		<input class="search form-control" placeholder="Поиск" />
 		<table class="table table-condensed table-hover">
 			<thead>
@@ -28,7 +28,6 @@
 						<?php if(++$i > 1) { ?>
 							<button class="sort btn btn-info btn-xs" data-sort="filter-<?= $i ?>">Сорт</button>
 						<?php } ?>
-
 					</th>
 				<?php } ?>
 			</tr>

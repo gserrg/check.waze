@@ -3,21 +3,13 @@
 	ini_set('display_errors', 1);
 	$nav = array('/waze/' => 'Главная страница');
 	include_once '../lib/DB.php';
+	include_once '../lib/TestsFactory.php';
 	$db = Waze\DB::instance();
+	$tests = new Waze\TestsFactory();
 	$areas = $db->as_array('SELECT areas_mapraid.name, areas_mapraid.id, updates.updated_at
 		FROM areas_mapraid
 		LEFT JOIN states_shapes ON(areas_mapraid.id = states_shapes.id_1)
-		LEFT JOIN updates ON(states_shapes.hasc_1 = updates.object)');
-	$result = $db->as_array('SELECT segments.area_id, count(*)
-		FROM segments
-		WHERE segments.connected = false and segments.roadtype NOT IN (18,10,5,19,16)
-		GROUP BY segments.area_id');
-	$not_connected = array();
-	array_walk($result, function($data){
-		global $not_connected;
-		$not_connected[$data['area_id']] = $data['count'];
-	});
-	//var_dump($not_connected);die;
+		LEFT JOIN updates ON(states_shapes.hasc_1 = updates.object) ORDER BY areas_mapraid.name');
 ?>
 <!doctype html>
 <html>
@@ -69,42 +61,11 @@
 										</div>
 										<div class="panel-body">
 											<div class="text-right">
-												Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', strtotime($area['updated_at'])) ?>
+												<a href="segments_area.php?area=<?= $area['id'] ?>">Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', strtotime($area['updated_at'])) ?></a>
 											</div>
 										</div>
 										<ul class="list-group">
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Сегменты не подсоединены</a>
-												<span class="badge text-right"><?= isset($not_connected[$area['id']]) ? $not_connected[$area['id']] : 0 ?></span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Недостаточный уроверь блокировки</a>
-												<span class="badge">area.segments.wrong_lock.count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Скорость не проверена</a>
-												<span class="badge">area.segments.important.unverified_speed.count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Важные дороги без скоростей</a>
-												<span class="badge">area.segments.without_speed.count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Некорректное возвышение</a>
-												<span class="badge">area.segments.where('level < -3 or level > 3').count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Неподтвержденные сегменты</a>
-												<span class="badge">area.segments.no_name.count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Важные дороги без названия</a>
-												<span class="badge">area.segments.roads.no_roundabout.without_name.count</span>
-											</li>
-											<li class="list-group-item">
-												<a href="segments_area.php?area=<?= $area['id'] ?>">Важные сегменты вне НП со скоростью 60</a>
-												<span class="badge">area.segments.wrong_speed.no_city.count</span>
-											</li>
+											<?= $tests->index($area['id']) ?>
 										</ul>
 									</div>
 								</div>
