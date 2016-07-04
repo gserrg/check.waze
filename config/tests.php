@@ -39,10 +39,10 @@ return [
 		'fields' => [
 			'' => 'c_link',
 			'Название' => 'c_title',
-			'км/ч A->B' => function($segment){
+			'A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
-			'км/ч B->A' => function($segment){
+			'B->A' => function($segment){
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
 			'Тип дороги' => 'c_road_type',
@@ -115,10 +115,10 @@ return [
 			'' => 'c_link',
 			'Название' => 'c_title',
 			'Тип дороги' => 'c_road_type',
-			'км/ч A->B' => function($segment){
+			'A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
-			'км/ч B->A' => function($segment){
+			'B->A' => function($segment){
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
 			'Обновление' => 'last_edit_on',

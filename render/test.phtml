@@ -24,10 +24,11 @@
 			<tr>
 				<?php foreach ($fields as $f_title => $field) { ?>
 					<th>
+						<?= $f_title ?><br>
 						<?php if(++$i > 1) { ?>
-							<button class="sort btn btn-info btn-xs" data-sort="filter-<?= $i ?>"></button>
+							<button class="sort btn btn-info btn-xs" data-sort="filter-<?= $i ?>">Сорт</button>
 						<?php } ?>
-						<?= $f_title ?>
+
 					</th>
 				<?php } ?>
 			</tr>
