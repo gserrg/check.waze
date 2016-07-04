@@ -2,12 +2,10 @@
 return [
 	'disconnected' => [
 		'title' => 'Сегменты не подсоединены <small>или нет разрешенных поворотов</small>',
-		'sql' => 'SELECT s.dc_density, s.latitude, s.longitude, s.id, s.roadtype, s.last_edit_on, s.street_id
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE connected = false and roadtype NOT IN (18,10,5,19,16) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.street_id, s.dc_density',
+			'where' => 'connected = false and roadtype NOT IN (18,10,5,19,16)',
+		],
 		'fields' => [
 			'Вес' => 'dc_density',
 			'Расположение сегмента' => 'c_link',
@@ -18,12 +16,10 @@ return [
 	],
 	'lock' => [
 		'title' => 'Недостаточный уроверь блокировки',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, s.lock
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE ((roadtype=2 and coalesce(lock,0) < 2) or (roadtype=7 and coalesce(lock,0) < 3) or (roadtype in (3,4,6) and coalesce(lock,0) < 4)) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.lock',
+			'where' => '(roadtype=2 and coalesce(lock,0) < 2) or (roadtype=7 and coalesce(lock,0) < 3) or (roadtype in (3,4,6) and coalesce(lock,0) < 4)',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -34,12 +30,10 @@ return [
 	],
 	'check_speed' => [
 		'title' => 'Скорость не проверена',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, s.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE ((fwddirection and fwdmaxspeedunverified) or (revdirection and revmaxspeedunverified)) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection',
+			'where' => '(fwddirection and fwdmaxspeedunverified) or (revdirection and revmaxspeedunverified)',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -55,12 +49,10 @@ return [
 	],
 	'no_speed' => [
 		'title' => 'Важные дороги без скоростей',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, s.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed is null) or (revdirection and revmaxspeed is null))) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection',
+			'where' => 'roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed is null) or (revdirection and revmaxspeed is null))',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -70,12 +62,10 @@ return [
 	],
 	'bad_level' => [
 		'title' => 'Некорректное возвышение',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on, s.level
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (s.level < -3 or s.level > 3) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.level',
+			'where' => 's.level < -3 or s.level > 3',
+		],
 		'fields' => [
 			'Возвышение' => 'level',
 			'Расположение сегмента' => 'c_link',
@@ -86,12 +76,9 @@ return [
 	],
 	'not_completed' => [
 		'title' => 'Неподтвержденные сегменты',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (street_id is null) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'where' => 'street_id is null',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -101,12 +88,9 @@ return [
 	],
 	'no_name' => [
 		'title' => 'Важные дороги без названия',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (str.isempty = TRUE and s.alt_names = FALSE AND roadtype in (3,6,7) AND roundabout = FALSE) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'where' => 'str.isempty = TRUE and s.alt_names = FALSE AND roadtype in (3,6,7) AND roundabout = FALSE',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -116,12 +100,10 @@ return [
 	],
 	'wrong_speed' => [
 		'title' => 'Важные сегменты вне НП со скоростью 60км/ч',
-		'sql' => 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection, s.last_edit_on
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty = TRUE) and area_id = :area_id  ORDER BY s.last_edit_on DESC LIMIT 2000',
+		'sql' => [
+			'columns' => 's.fwdmaxspeed, s.revmaxspeed, s.fwddirection, s.revdirection',
+			'where' => 'roadtype in (2,3,4,6,7) and ((fwddirection and fwdmaxspeed = 60) or (revdirection and revmaxspeed = 60)) and c.isempty = TRUE',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',
@@ -137,12 +119,9 @@ return [
 	],
 	'railroad' => [
 		'title' => 'Железная дорога с названием',
-		'sql' => "SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE (roadtype = 18 and (str.name <> '' OR c.name <> '' OR s.alt_names = TRUE)) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000",
+		'sql' => [
+			'where' => 'roadtype = 18 and (str.name <> \'\' OR c.name <> \'\' OR s.alt_names = TRUE)',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Последнее обновление' => 'last_edit_on',
@@ -151,12 +130,9 @@ return [
 	],
 	'ring' => [
 		'title' => 'Кольца с названием',
-		'sql' => "SELECT s.latitude, s.longitude, s.id, s.roadtype, s.street_id, s.last_edit_on
-			, u.username as u_username, u.rank as u_rank
-			, str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty FROM segments AS s
-			LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id)
-			LEFT JOIN users as u on(u.id = s.last_edit_by)
-			WHERE ((str.name <> '' OR s.alt_names = TRUE) AND s.roundabout = TRUE) and area_id = :area_id ORDER BY s.last_edit_on DESC LIMIT 2000",
+		'sql' => [
+			'where' => '(str.name <> \'\' OR s.alt_names = TRUE) AND s.roundabout = TRUE',
+		],
 		'fields' => [
 			'Расположение сегмента' => 'c_link',
 			'Тип дороги' => 'c_road_type',

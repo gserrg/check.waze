@@ -16,13 +16,12 @@ class TestsFactory
 		$this->templates = include('fields_templates.php');
 	}
 
-	public function display($area)
+	public function display($area_id)
 	{
 		$render = '';
 		foreach ($this->test as $test_name => $config) {
 			if (isset($config['sql'], $config['fields'])) {
-				$sql = str_replace(':area_id' , $area, $config['sql']);
-				$list = $this->db->as_array($sql);
+				$list = $this->db->get_segments($config['sql'], $area_id);
 				if ($list !== false && count($list)) {
 					$params = $config;
 					unset($params['sql']);
