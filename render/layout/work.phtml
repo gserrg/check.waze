@@ -1,0 +1,78 @@
+<?php
+	/**
+	 * @var string $title
+	 * @var array  $navigation
+	 * @var string $content
+	 * @var string $flag
+	 * @var array  $js
+	 * @var array  $css
+	 */
+?>
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title><?= $title ?></title>
+	<?php foreach ($css as $file => $params) { ?>
+		<link rel="stylesheet" media="all" href=<?= $file ?> <?= $params ?>>
+	<?php } ?>
+</head>
+<body>
+	<header class="navbar navbar-fixed-top bg-info">
+		<nav class="navbar-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-md-8 col-lg-8">
+						<h4><?= $title ?></h4>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4">
+						<ol class="breadcrumb text-right">
+							<?php foreach ($navigation as $title => $params) { ?>
+								<?php
+									$url = null;
+									if (!is_array($params)) {
+										$url = $params;
+									} else if(isset($params['url'])){
+										$url = $params['url'];
+									}
+									$current = $url && ($_SERVER['REQUEST_URI'] == $url);
+									if (is_array($params) && isset($params['flag'])) {
+										$current = $current || $flag == $params['flag'];
+									}
+								?>
+								<?php if ($current) { ?>
+									<li class="active small"><?= $title ?></li>
+								<?php } else { ?>
+									<li class="small">
+										<a href="<?= $url ?>"><?= $title ?></a>
+									</li>
+								<?php } ?>
+							<?php } ?>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div id="main" role="main">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<?= $content ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="container">
+		<div class="row">
+			<div class="col-sm-0 col-md-3 col-lg-3">&nbsp;</div>
+			<div class="col-sm-12 col-md-3 col-lg-3">
+				<!--<a href="/options" class="text-right">Настройки</a>-->
+			</div>
+		</div>
+	</footer>
+	<?php foreach ($js as $file => $params) { ?>
+		<script src="<?= $file ?>" <?= $params ?>></script>
+	<?php } ?>
+</body>
+</html>

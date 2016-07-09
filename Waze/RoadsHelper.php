@@ -1,51 +1,16 @@
 <?php
 namespace Waze;
 
-include_once 'DB.php';
 
-class RoadsHelper
+class RoadsHelper extends Singleton
 {
 	private $types;
-	private static $instance;
 	private $db;
 
-	/**
-	 * RoadsHelper constructor.
-	 *
-	 //* @param int $region
-	 */
-	public function __construct(/*$region*/)
+	public function init()
 	{
-		$this->types = [
-			3 => 'freeway',
-			6 => 'major-highway',
-			7 => 'minor-highway',
-			4 => 'Ramp',
-			2 => 'primary-street',
-			1 => 'street',
-			8 => 'dirt-road',
-			20 => 'parking-lot-road',
-			17 => 'private-road',
-			5 => 'walking-trail',
-			10 => 'pedestrian-boardwalk',
-			16 => 'stairway',
-			18 => 'railroad',
-			19 => 'runway',
-			15 => 'ferry',
-		];
-		self::$instance = $this;
-		$this->db = DB::instance();
-	}
-
-	/**
-	 * @return $this
-	 */
-	public static function instance()
-	{
-		if (self::$instance === null) {
-			new self;
-		}
-		return self::$instance;
+		$this->types = Config::get('types');
+		$this->db = DB::getInstance();
 	}
 
 	/**
@@ -58,7 +23,7 @@ class RoadsHelper
 		if (!isset($this->types[$id])) {
 			return 'unknown';
 		}
-		return $this->types[$id];
+		return isset($this->types[$id]['name']) ? $this->types[$id]['name'] : $this->types[$id]['title'];
 	}
 
 	/**

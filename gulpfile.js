@@ -7,8 +7,10 @@ gulp.task('sync', function () {
 	livereload();
 	livereload.listen();
 	gulp.watch([
-			'**/*.php',
-			'render/*.phtml',
+			'config/**/*.php',
+			'Waze/**/*.php',
+			'render/**/*.phtml',
+			'www/index.php',
 			'www/build/*.css',
 			'www/build/*.js'
 	],function(){

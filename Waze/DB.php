@@ -2,31 +2,23 @@
 
 namespace Waze;
 
-
-class DB
+class DB extends Singleton
 {
-	private static $instance;
+	protected $connection;
 
-	/**
-	 * DB constructor.
-	 */
-	public function __construct()
+	public function init()
 	{
-		$c = include('../config/db.php');
+		$c = Config::get('db');
 		$dsn = 'host=' . $c['host'] . ' port=' . $c['port'] . ' user=' . $c['user'] . ' password=' . $c['password'] . ' dbname=' . $c['schema'];
 		$this->connection = pg_connect($dsn) or die('Could not connect: ' . pg_last_error());
-		self::$instance = $this;
 	}
 
 	/**
-	 * @return $this
+	 * @param mixed $connection
 	 */
-	public static function instance()
+	public function setConnection($connection)
 	{
-		if (self::$instance === null) {
-			new self;
-		}
-		return self::$instance;
+
 	}
 
 	public function as_array($query)

@@ -1,19 +1,19 @@
 <?php
+
 namespace Waze;
 
-include_once 'DB.php';
-
-class TestsFactory
+class TestsFactory extends Singleton
 {
+	/** @var DB $db */
 	private $db;
 	private $test;
 	private $templates;
 
-	public function __construct()
+	public function init()
 	{
-		$this->db = DB::instance();
-		$this->test = include('../config/tests.php');
-		$this->templates = include('fields_templates.php');
+		$this->db = DB::getInstance();
+		$this->test = Config::get('tests');
+		$this->templates = Config::get('fields_templates');
 	}
 
 	public function area($area_id)
@@ -39,13 +39,13 @@ class TestsFactory
 	{
 		ob_start();
 		extract($params);
-		include ('../render/area-test.phtml');
+		include('../render/area-test.phtml');
 		$render = ob_get_contents();
 		ob_clean();
 		return $render;
 	}
 
-	public function index($area_id)
+	public function summary($area_id)
 	{
 		$render = '';
 		foreach ($this->test as $test_name => $config) {
@@ -54,7 +54,8 @@ class TestsFactory
 				if ($count !== false) {
 					$render .= $this->render_count(array(
 						'title' => $config['title'],
-						'count' => $count));
+						'count' => $count,
+					));
 				}
 			}
 		}
@@ -65,7 +66,7 @@ class TestsFactory
 	{
 		ob_start();
 		extract($params);
-		include ('../render/index-test.phtml');
+		include('../render/summary-test.phtml');
 		$render = ob_get_contents();
 		ob_clean();
 		return $render;

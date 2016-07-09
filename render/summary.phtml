@@ -1,0 +1,29 @@
+<?php
+	/**
+	 * @var array             $areas
+	 * @var Waze\TestsFactory $test
+	 */
+?>
+<div class="container">
+	<div class="row">
+		<?php foreach ($areas as $area) { ?>
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<?= $area['name'] ?>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="text-right">
+							<a href="/test_area/<?= $area['id'] ?>/">Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', strtotime($area['updated_at'])) ?></a>
+						</div>
+					</div>
+					<ul class="list-group">
+						<?= $test->summary($area['id']) ?>
+					</ul>
+				</div>
+			</div>
+		<?php } ?>
+	</div>
+</div>
