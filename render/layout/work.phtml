@@ -42,7 +42,7 @@
 								?>
 								<?php if ($current) { ?>
 									<li class="active small"><?= $title ?></li>
-								<?php } else { ?>
+								<?php } else if ($url){ ?>
 									<li class="small">
 										<a href="<?= $url ?>"><?= $title ?></a>
 									</li>
