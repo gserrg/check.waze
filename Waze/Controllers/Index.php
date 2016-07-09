@@ -16,7 +16,6 @@ class Index extends Controller
 		LEFT JOIN updates ON(states_shapes.hasc_1 = updates.object) ORDER BY areas_mapraid.name');
 		$this->layout([
 			'css' => [
-				'/builds/bootstrap.min.css' => 'media="all" data-turbolinks-track="true"',
 				'/builds/site.css' => '',
 			],
 		]);

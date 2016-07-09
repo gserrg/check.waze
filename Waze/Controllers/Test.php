@@ -17,7 +17,6 @@ class Test extends Controller
 		}
 		$this->layout([
 			'css' => [
-				'/builds/bootstrap.min.css' => 'media="all" data-turbolinks-track="true"',
 				'/builds/site.css' => '',
 			],
 			'title' => 'check.waze - ' . $area_name[0]['name'],

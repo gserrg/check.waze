@@ -17,7 +17,6 @@ class Summary extends Controller
 		$tests = TestsFactory::getInstance();
 		$this->layout([
 			'css' => [
-				'/builds/bootstrap.min.css' => 'media="all" data-turbolinks-track="true"',
 				'/builds/site.css' => '',
 			],
 			'title' => 'check.waze - сводная информация по ошибкам',

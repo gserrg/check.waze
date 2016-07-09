@@ -15,8 +15,10 @@ class Controller
 		$this->params = $params;
 		$this->layout = 'work';
 		$this->layout_params = array(
-			'title' => 'check.waze - детектор ошибок карты',
-			'css' => [],
+			'title' => 'check.waze - сканер ошибок карты',
+			'css' => [
+				'/builds/bootstrap.min.css' => 'media="all" data-turbolinks-track="true"',
+			],
 			'navigation' => Config::get('navigation'),
 			'js' => [],
 		);

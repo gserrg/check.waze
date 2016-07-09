@@ -15,6 +15,9 @@ class Router
 		if ($request == '/summary/') {
 			return new Controllers\Summary();
 		}
+		if ($request == '/map/') {
+			return new Controllers\Map();
+		}
 		if (preg_match('~/test_area/(\d+)/~', $request, $m)) {
 			if(count($m) == 2) {
 				return new Controllers\Test([
