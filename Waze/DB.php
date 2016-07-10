@@ -32,7 +32,7 @@ class DB extends Singleton
 		$join = isset($params['join']) ? $params['join'] : '';
 		$where = isset($params['where']) ? '(' . $params['where'] . ') AND ' : '';
 		$order = isset($params['order']) ? $params['order'] : 's.last_edit_on DESC';
-		$limit = isset($params['limit']) ? $params['limit'] : 2000;
+		$limit = isset($params['limit']) ? $params['limit'] : 5000;
 		$query = 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.last_edit_on, u.username as u_username, u.rank as u_rank, s.street_id, '
 			.'str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty' . $columns
 			. 'FROM segments AS s '
