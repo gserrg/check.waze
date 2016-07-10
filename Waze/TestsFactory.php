@@ -68,7 +68,7 @@ class TestsFactory extends Singleton
 		extract($params);
 		include('../render/summary-test.phtml');
 		$render = ob_get_contents();
-		ob_clean();
+		ob_end_clean();
 		return $render;
 	}
 }

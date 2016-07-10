@@ -44,7 +44,7 @@ class Controller
 		/** @noinspection PhpIncludeInspection */
 		include($__file_name);
 		$render = ob_get_contents();
-		ob_clean();
+		ob_end_clean();
 		if ($this->layout) {
 			$__layout_name = $this->layout;
 			$__file_name = 'layout/' . $__layout_name;
