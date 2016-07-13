@@ -114,13 +114,13 @@ return [
 		'fields' => [
 			'' => 'c_link',
 			'Название' => 'c_title',
-			'Тип дороги' => 'c_road_type',
 			'A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
 			'B->A' => function($segment){
 				return $segment['revdirection'] != false ? $segment['revmaxspeed'] : '-';
 			},
+			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
@@ -145,6 +145,21 @@ return [
 		'fields' => [
 			'' => 'c_link',
 			'Название' => 'c_title',
+			'Тип дороги' => 'c_road_type',
+			'Обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
+	],
+	'short' => [
+		'title' => 'Короткие сегменты',
+		'sql' => [
+			'columns' => 's.length',
+			'where' => 'roadtype in (1,2,3,4,6,7) and length < 6 AND s.roundabout = FALSE AND fwddirection',
+		],
+		'fields' => [
+			'' => 'c_link',
+			'Название' => 'c_title',
+			'Длинна' => 'length',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
