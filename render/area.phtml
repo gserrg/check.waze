@@ -1,9 +1,18 @@
 <?php
 	/**
 	 * @var int               $area_id
+	 * @var string            $editor_level
 	 * @var Waze\TestsFactory $tests
 	 */
 ?>
 <div id="accordion" class="panel-group" role="tablist" aria-multiselecttable="true">
+	<?php if($editor_level < 6) { ?>
+		<div class="container">
+			<div class="text-right small">
+				Внимание! Не отображаются сегменты, заблокированные выше, чем <strong><?= $editor_level ?></strong> уровень.
+				<a href="/settings/">Настройки</a>
+			</div>
+		</div>
+	<?php } ?>
 	<?= $tests->area($area_id) ?>
 </div>

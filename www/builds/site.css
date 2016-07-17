@@ -11,3 +11,7 @@ body {
 .sort.desc:after {
 	content: '^';
 }
+.breadcrumb {
+	margin-bottom: 0;
+	padding-left: 0;
+}

@@ -19,12 +19,12 @@ return [
 		'title' => 'Недостаточный уроверь блокировки',
 		'sql' => [
 			'columns' => 's.lock',
-			'where' => '(roadtype=2 and coalesce(lock,0) < 2) or (roadtype=7 and coalesce(lock,0) < 3) or (roadtype in (3,4,6) and coalesce(lock,0) < 4)',
+			'where' => '(roadtype in (2,3,4,6,7) and lock is null) or (roadtype=2 and lock < 2) or (roadtype=7 and lock < 3) or (roadtype in (3,4,6) and lock < 4)',
 		],
 		'fields' => [
 			'' => 'c_link',
 			'Название' => 'c_title',
-			'Уровень блокировки' => 'lock',
+			'Уровень блокировки' => 'c_lock',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',

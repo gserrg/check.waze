@@ -13,6 +13,9 @@ class Router
 		if ($request == '/summary/') {
 			return new Controllers\Summary();
 		}
+		if ($request == '/settings/') {
+			return new Controllers\Settings();
+		}
 		if ($request == '/map/') {
 			return new Controllers\Map();
 		}

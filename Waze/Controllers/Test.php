@@ -30,6 +30,7 @@ class Test extends Controller
 		return $this->render('area', array(
 			'area_id' => $area_id,
 			'tests' => TestsFactory::getInstance(),
+			'editor_level' => isset($_COOKIE['editor_level']) ? $_COOKIE['editor_level'] : 6,
 		));
 	}
 }
