@@ -9,7 +9,7 @@ function init () {
 		center: [55.84, 45.18],
 		zoom: 4
 	});
-	var polygons = polygon();
+	var polygons = coordinates();
 	var i;
 	for (i in polygons) {
 		myMap.geoObjects.add(new ymaps.Polygon(polygons[i], {}, {fillColor: i}));

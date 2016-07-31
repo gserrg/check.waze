@@ -11,8 +11,8 @@ gulp.task('sync', function () {
 			'Waze/**/*.php',
 			'render/**/*.phtml',
 			'www/index.php',
-			'www/build/*.css',
-			'www/build/*.js'
+			'www/builds/*.css',
+			'www/builds/*.js'
 	],function(){
 		livereload.reload();
 	});

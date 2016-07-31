@@ -16,17 +16,18 @@ class Map extends Controller
 		foreach ($areas as $area) {
 			$tmp = $this->parse($area);
 			if ($tmp) {
-				$list[] = '"' . $this->color() . '": ' . $tmp;
+				$list[] = '"' . $this->randColor() . '": ' . $tmp;
 			}
 		}
 		$this->layout([
 			'js' => [
-				'https://api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects&lang=ru-RU' => '',
-				'/builds/map.js' => '',
+				'https://maps.googleapis.com/maps/api/js?key=AIzaSyCX9tzYywsfi6uB1KvBN3CGRl3e3S-QBtg&signed_in=true&callback=initMap' => 'async defer',
+				//'https://api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects&lang=ru-RU' => '',
+				'/builds/g-map.js' => '',
 			],
 		]);
 		return $this->render('map', [
-			'ya' => '{' . implode(',', $list) . '}',
+			'raw_coordinates' => '{' . implode(',', $list) . '}',
 		]);
 	}
 
@@ -56,7 +57,7 @@ class Map extends Controller
 		return '[[' . implode('], [', $out) . ']]';
 	}
 
-	private function color() {
+	private function randColor() {
 		$rand = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 		return '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
 	}
