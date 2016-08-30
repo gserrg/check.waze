@@ -19,6 +19,9 @@ class Router
 		if ($request == '/map/') {
 			return new Controllers\Map();
 		}
+		if ($request == '/boxer/') {
+			return new Controllers\Boxer();
+		}
 		if ($request == Config::get('git')) {
 			system('cd ..; git pull');
 			header('HTTP/1.0 404 Not Found');

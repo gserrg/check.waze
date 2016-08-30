@@ -9,25 +9,30 @@ class Map extends Controller
 {
 	public function process()
 	{
-		$areas = DB::getInstance()->as_array('SELECT ST_AsText(areas_mapraid.geom) FROM areas_mapraid
+		$areas = DB::getInstance()->as_array('SELECT ST_AsText(areas_mapraid.geom), areas_mapraid.name, areas_mapraid.id FROM areas_mapraid
 			LEFT JOIN states_shapes ON(areas_mapraid.id = states_shapes.id_1)
 			LEFT JOIN updates ON(states_shapes.hasc_1 = updates.object)');
 		$list = array();
 		foreach ($areas as $area) {
 			$tmp = $this->parse($area);
 			if ($tmp) {
-				$list[] = '"' . $this->randColor() . '": ' . $tmp;
+				$list[] = '{'.
+					'color:"' . $this->randColor() . '", ' .
+					'name:"' . $area['name'] . '", ' .
+					'id:' . $area['id'] . ', ' .
+					'poly:' . $tmp .
+				'}';
 			}
 		}
 		$this->layout([
 			'js' => [
-				'https://maps.googleapis.com/maps/api/js?key=AIzaSyCX9tzYywsfi6uB1KvBN3CGRl3e3S-QBtg&signed_in=true&callback=initMap' => 'async defer',
-				//'https://api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects&lang=ru-RU' => '',
-				'/builds/g-map.js' => '',
+				'https://api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects,&lang=ru-RU' => '',
+				'/builds/y-map.js' => '',
 			],
+			'css' => ['/builds/site.css' => '']
 		]);
-		return $this->render('map', [
-			'raw_coordinates' => '{' . implode(',', $list) . '}',
+		return $this->render('y-map', [
+			'raw_coordinates' => '[' . implode(',', $list) . ']',
 		]);
 	}
 
