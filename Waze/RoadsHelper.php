@@ -36,20 +36,44 @@ class RoadsHelper extends Singleton
 		if ($data['street_id'] == 0) {
 			return 'Безымянный (' . $data['id'] . ')';
 		}
-		if (empty($data['str_name']) || $data['str_name'] == false) {
-			$street = 'Без улицы';
-		} else {
-			$street = $data['str_name'];
+		return $this->nameStreet($data) . ', ' . $this->nameCity($data);
+	}
+
+	/**
+	 * @param string[] $data
+	 *
+	 * @return string
+	 */
+	public function nameCity($data)
+	{
+		if ($data['street_id'] == 0) {
+			return '#' . $data['id'];
 		}
 		if (empty($data['str_city_id'])) {
-			$city = 'без города';
+			return '#без города';
 		} else {
 			if (empty($data['c_name']) || $data['c_isempty'] == false) {
-				$city = 'без города';
+				return '#без города';
 			} else {
-				$city = $data['c_name'];
+				return $data['c_name'];
 			}
 		}
-		return $street . ', ' . $city;
+	}
+
+	/**
+	 * @param string[] $data
+	 *
+	 * @return string
+	 */
+	public function nameStreet($data)
+	{
+		if ($data['street_id'] == 0) {
+			return '#' . $data['id'];
+		}
+		if (empty($data['str_name']) || $data['str_name'] == false) {
+			return '#без улицы';
+		} else {
+			return $data['str_name'];
+		}
 	}
 }

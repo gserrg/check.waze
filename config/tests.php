@@ -8,7 +8,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Вес' => 'dc_density',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -23,7 +24,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Уровень блокировки' => 'c_lock',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -38,7 +40,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
@@ -58,7 +61,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -72,7 +76,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Возвышение' => 'level',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
@@ -86,7 +91,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -99,7 +105,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -113,7 +120,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'A->B' => function($segment){
 				return $segment['fwddirection'] != false ? $segment['fwdmaxspeed'] : '-';
 			},
@@ -132,7 +140,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
@@ -144,7 +153,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
@@ -158,7 +168,8 @@ return [
 		],
 		'fields' => [
 			'' => 'c_link',
-			'Название' => 'c_title',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
 			'Длина' => 'length',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',

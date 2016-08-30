@@ -10,10 +10,15 @@
 		},
 		'c_lock' => function($segment) {
 			return $segment['lock'] ? : 'auto';
-
 		},
 		'c_title' => function($segment) {
 			return Waze\RoadsHelper::getInstance()->name($segment);
+		},
+		'c_title_city' => function($segment) {
+			return Waze\RoadsHelper::getInstance()->nameCity($segment);
+		},
+		'c_title_street' => function($segment) {
+			return Waze\RoadsHelper::getInstance()->nameStreet($segment);
 		},
 		'c_editor' => function($segment) {
 			return $segment['u_username'] . ' (' . $segment['u_rank'] . ')';
