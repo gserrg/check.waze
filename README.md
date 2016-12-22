@@ -1,1 +1,1 @@
-Вариант морды http://check.waze.su/ на PHP
+Сервис поиска ошибок карт waze.com
