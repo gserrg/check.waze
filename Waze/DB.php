@@ -37,9 +37,12 @@ class DB extends Singleton
 		$order = isset($params['order']) ? $params['order'] : 's.last_edit_on DESC';
 		$limit = isset($params['limit']) ? $params['limit'] : 5000;
 		$query = 'SELECT s.latitude, s.longitude, s.id, s.roadtype, s.last_edit_on, u.username as u_username, u.rank as u_rank, s.street_id, '
-			.'str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty' . $columns
+			.'str.name as str_name, str.isempty as str_isempty, str.city_id as str_city_id, c.name as c_name, c.isempty as c_isempty, st.name as st_name' . $columns
 			. 'FROM segments AS s '
-			. 'LEFT JOIN streets as str ON (s.street_id = str.id) LEFT JOIN cities as c ON (str.city_id = c.id) LEFT JOIN users as u on(u.id = s.last_edit_by) ' . $join
+			. 'LEFT JOIN streets as str ON (s.street_id = str.id) '
+			. 'LEFT JOIN cities as c ON (str.city_id = c.id) '
+			. 'LEFT JOIN states as st ON (c.state_id = st.id) '
+			. 'LEFT JOIN users as u on(u.id = s.last_edit_by) ' . $join
 			.' WHERE ' . $where . ' area_id = ' . $area_id . ' ORDER BY ' . $order . ' LIMIT ' . $limit;
 		return $this->as_array($query);
 	}

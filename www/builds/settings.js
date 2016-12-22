@@ -38,11 +38,16 @@
 		if (level != undefined) {
 			$('.form-control[name="editor_level"]').val(level);
 		}
+		var visible_region = cookieGet('visible_region');
+		if (visible_region != undefined) {
+			$('.form-control[name="visible_region"]').val(visible_region);
+		}
 		$('.settings-form').find('button[type="submit"]').click(function(){
 			var days = 60;
 			cookieSet('wme_url', $('.form-control[name="wme_url"]').val(), 86400 * days, '/');
 			cookieSet('editor_level', $('.form-control[name="editor_level"]').val(), 86400 * days , '/');
-			alert('Сохранено!')
+			cookieSet('visible_region', $('.form-control[name="visible_region"]').val(), 86400 * days , '/');
+			alert('Сохранено!');
 			return false;
 		});
 	});

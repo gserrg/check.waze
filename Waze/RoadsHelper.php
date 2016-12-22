@@ -47,15 +47,19 @@ class RoadsHelper extends Singleton
 	public function nameCity($data)
 	{
 		if ($data['street_id'] == 0) {
-			return '#' . $data['id'];
+			return '#' . $data['id'] . " [{$data['st_name']}]";
 		}
 		if (empty($data['str_city_id'])) {
-			return '#без города';
+			return '#без города' . " [{$data['st_name']}]";
 		} else {
 			if (empty($data['c_name']) || $data['c_isempty'] == false) {
-				return '#без города';
+				return '#без города' . " [{$data['st_name']}]";
 			} else {
-				return $data['c_name'];
+				$name = $data['c_name'];
+				if(isset($_COOKIE['visible_region']) && $_COOKIE['visible_region'] == 'yes') {
+					$name .= " [{$data['st_name']}]";
+				}
+				return $name;
 			}
 		}
 	}
