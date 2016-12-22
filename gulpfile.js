@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 
-gulp.task('sync', function () {
+gulp.task('default', function () {
 	livereload();
 	livereload.listen();
 	gulp.watch([
@@ -17,5 +17,3 @@ gulp.task('sync', function () {
 		livereload.reload();
 	});
 });
-
-gulp.task('default', gulp.parallel('sync'));

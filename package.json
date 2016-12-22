@@ -8,11 +8,8 @@
 		"type": "git",
 		"url": ""
 	},
-	"dependencies": {
-		"gulp": "github:gulpjs/gulp#4.0"
-	},
 	"devDependencies": {
-		"gulp": "github:gulpjs/gulp#4.0",
+		"gulp": "^3.0.0",
 		"gulp-livereload": "^3.8.1"
 	}
 }
