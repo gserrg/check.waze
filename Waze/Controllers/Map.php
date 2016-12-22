@@ -9,15 +9,13 @@ class Map extends Controller
 {
 	public function process()
 	{
-		$areas = DB::getInstance()->as_array('SELECT ST_AsText(areas_mapraid.geom), areas_mapraid.name, areas_mapraid.id FROM areas_mapraid
-			LEFT JOIN states_shapes ON(areas_mapraid.id = states_shapes.id_1)
-			LEFT JOIN updates ON(states_shapes.hasc_1 = updates.object)');
+		$areas = DB::getInstance()->as_array('SELECT ST_AsText(areas_mapraid.geom), areas_mapraid.name, areas_mapraid.id FROM areas_mapraid');
 		$list = array();
 		foreach ($areas as $area) {
 			$tmp = $this->parse($area);
 			if ($tmp) {
 				$list[] = '{'.
-					'color:"' . $this->randColor() . '", ' .
+					'color:"' . $this->titleColor($area['name']) . '", ' .
 					'name:"' . $area['name'] . '", ' .
 					'id:' . $area['id'] . ', ' .
 					'poly:' . $tmp .
@@ -62,9 +60,9 @@ class Map extends Controller
 		return '[[' . implode('], [', $out) . ']]';
 	}
 
-	private function randColor() {
-		$rand = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-		return '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+	private function titleColor($name) {
+		$md5 = md5($name);
+		return '#' . substr($md5, 0, 6);
 	}
 
 }
