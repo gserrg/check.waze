@@ -1,3 +1,4 @@
 /node_modules/
 /config/db.php
 /config/git.php
+/config/scanner.yaml
