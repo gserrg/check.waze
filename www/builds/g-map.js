@@ -1,4 +1,4 @@
-/*global $, google,*/
+/*global google,*/
 /*jslint white: true, vars: true*/
 var map;
 var boxes = [];
@@ -10,40 +10,7 @@ function initMap() {
 		center: {lat: 55.33137, lng: 37.63916},
 		zoom: 4
 	});
-	var raw = coordinates();
-	var i, j, z;
-	var polygon;
-	var zone;
-	var render;
-	for (i in raw) {
-		if (raw.hasOwnProperty(i)) {
-			polygon = [];
-			zone = raw[i];
-			for (j in zone) {
-				if (zone.hasOwnProperty(j)) {
-					for (z in zone[j]) {
-						if (zone[j].hasOwnProperty(z)) {
-							polygon.push({
-								lat: zone[j][z][0],
-								lng: zone[j][z][1]
-							})
-						}
-					}
-				}
-			}
-			render = new google.maps.Polygon({
-				paths: polygon,
-				fillColor: i,
-				fillOpacity: 0.6,
-				strokeWeight: 1,
-				strokeColor: i
-			});
-			render.addListener('click', function(event){
-				clickCoordinates = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-			});
-			render.setMap(map);
-		}
-	}
+	renderBoxes();
 }
 function initControls() {
 	document.getElementById('render').onclick = function(){
@@ -190,8 +157,7 @@ function addBox(points, fixed) {
 		fix = check(this, 'west') || fix;
 		fix = check(this, 'east') || fix;
 		if (fix) {
-			var newBox = addBox([bound['west'],bound['north'],bound['east'],bound['south']], fixedToArray(this));
-			lastBox = newBox;
+			lastBox = addBox([bound['west'],bound['north'],bound['east'],bound['south']], fixedToArray(this));
 			this.setMap(null);
 		}
 	});
@@ -202,10 +168,10 @@ function addBox(points, fixed) {
 }
 function saveBoxes() {
 	var i;
-	str = '';
+	var str = '';
 	for (i in boxes) {
 		if (boxes.hasOwnProperty(i) && boxes[i].getMap()) {
-			str = str+ boxes[i].getBounds().toUrlValue() + '\n';
+			str += boxes[i].getBounds().toString() + '\n';
 		}
 	}
 	document.getElementById('list').value = str;

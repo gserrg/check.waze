@@ -20,7 +20,13 @@ class Router
 			return new Controllers\Map();
 		}
 		if ($request == '/boxer/') {
-			return new Controllers\Boxer();
+			return new Controllers\Boxer(['flag' => 'boxer',]);
+		}
+		if (preg_match('~^/boxer/(\w\w.\w\w)/$~', $request, $m)) {
+			return new Controllers\Boxer([
+				'code' => $m[1],
+				'flag' => 'boxer',
+			]);
 		}
 		if ($request == Config::get('git')) {
 			system('cd ..; git pull');

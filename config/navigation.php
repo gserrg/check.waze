@@ -7,7 +7,9 @@ return [
 	],
 	'Настройки' => '/settings/',
 	'Карта' => '/map/',
-	'Boxes' => '/boxer/',
+	'Boxes' => [
+		'flag' => 'boxer',
+	],
 	'Данные по региону' => [
 		'flag' => 'area',
 	],

@@ -1,11 +1,6 @@
 <?php
-	/** @var string $raw_coordinates */
+	/** @var string $coordinates */
 ?>
-<script>
-	function coordinates (){
-		return <?= $raw_coordinates ?>;
-	}
-</script>
 <div id="map" style="width:100%; height:800px"></div>
 <div>Привязки последнего бокса:
 	<label><input type="checkbox" id="north">север</label>
@@ -17,5 +12,5 @@
 <button id="render">Загрузить из списка</button>
 <button id="save">Создать список</button>
 <button id="add">Добавить клон последнего</button>
-<textarea id="list" rows="10" style="width:100%">20.8,55.3,21.07,55.21
+<textarea id="list" rows="10" style="width:100%"><?= $coordinates ?>
 </textarea>

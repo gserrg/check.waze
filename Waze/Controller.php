@@ -21,6 +21,7 @@ class Controller
 			],
 			'navigation' => Config::get('navigation'),
 			'js' => [],
+			'flag' => null,
 		);
 		if (isset($this->params['flag'])) {
 			$this->layout(['flag' => $this->params['flag']]);
