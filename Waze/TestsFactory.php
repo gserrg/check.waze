@@ -8,12 +8,14 @@ class TestsFactory extends Singleton
 	private $db;
 	private $test;
 	private $templates;
+	private $params;
 
-	public function init()
+	public function init($params = [])
 	{
 		$this->db = DB::getInstance();
 		$this->test = Config::get('tests');
 		$this->templates = Config::get('fields_templates');
+		$this->params = $params;
 	}
 
 	public function area($area_id)
@@ -21,7 +23,11 @@ class TestsFactory extends Singleton
 		$render = '';
 		foreach ($this->test as $test_name => $config) {
 			if (isset($config['sql'], $config['fields'])) {
-				$list = $this->db->get_segments($config['sql'], $area_id);
+				if(isset($this->params['betta']) && $this->params['betta']) {
+					$list = $this->db->get_segments_betta($config['sql'], $area_id);
+				} else {
+					$list = $this->db->get_segments($config['sql'], $area_id);
+				}
 				if ($list !== false && count($list)) {
 					$params = $config;
 					unset($params['sql']);

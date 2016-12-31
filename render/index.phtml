@@ -16,7 +16,8 @@
 					<div class="panel-body">
 						<div class="text-right">
 							<a href="/test_area/<?= $area['id'] ?>/">Обновлено <?= strftime('%d/%m/%Y %H:%M %Z', strtotime($area['updated_at'])) ?></a>
-							<a style="float:left" href="/boxer/<?= $area['hasc_1'] ?>/">Boxes</a>
+							<a style="float:left; margin-right: 10px;" href="/boxer/<?= strtolower($area['hasc_1']) ?>/">Boxes</a>
+							<a style="float:left" href="/test_area/<?= strtolower($area['hasc_1']) ?>/">betta</a>
 						</div>
 					</div>
 				</div>

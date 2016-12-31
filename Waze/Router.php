@@ -33,6 +33,14 @@ class Router
 			header('HTTP/1.0 404 Not Found');
 			die;
 		}
+		if (preg_match('~/test_area/(\w\w.\w\w)/~', $request, $m)) {
+			if (count($m) == 2) {
+				return new Controllers\TestBetta([
+					'area_code' => $m[1],
+					'flag' => 'area',
+				]);
+			}
+		}
 		if (preg_match('~/test_area/(\d+)/~', $request, $m)) {
 			if (count($m) == 2) {
 				return new Controllers\Test([

@@ -8,9 +8,11 @@ class Singleton
 
 	/**
 	 *
+	 * @param array $params
+	 *
 	 * @return $this
 	 */
-	public static function getInstance()
+	public static function getInstance($params = [])
 	{
 		if (!is_array(static::$instance)) {
 			static::$instance = [];
@@ -20,7 +22,7 @@ class Singleton
 			$instance = new $class();
 			static::$instance[$class] = $instance;
 			if (method_exists($instance, 'init')) {
-				$instance->init();
+				$instance->init($params);
 			}
 		}
 		return static::$instance[$class];
