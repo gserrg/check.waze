@@ -15,18 +15,16 @@ require 'pg'
 require 'yaml'
 require 'json'
 
-if ARGV.size < 7
+if ARGV.size < 5
   puts "Usage: ruby scan_segments.rb <user> <password> <west longitude> <north latitude> <east longitude> <south latitude> <step>"
   exit
 end
 
-USER = ARGV[0]
-PASS = ARGV[1]
-LongOeste = ARGV[2].to_f
-LatNorte = ARGV[3].to_f
-LongLeste = ARGV[4].to_f
-LatSul = ARGV[5].to_f
-Passo = ARGV[6].to_f
+LongOeste = ARGV[0].to_f
+LatNorte = ARGV[1].to_f
+LongLeste = ARGV[2].to_f
+LatSul = ARGV[3].to_f
+Passo = ARGV[4].to_f
 
 puts "Starting analysis on [#{LongOeste} #{LatNorte}] - [#{LongLeste} #{LatSul}]"
 
@@ -38,7 +36,7 @@ begin
 rescue Mechanize::ResponseCodeError
   csrf_token = agent.cookie_jar.jar['www.waze.com']['/']['_csrf_token'].value
 end
-login = agent.post('https://www.waze.com/login/create', {"user_id" => USER, "password" => PASS}, {"X-CSRF-Token" => csrf_token})
+login = agent.post('https://www.waze.com/login/create', config['editor'], {"X-CSRF-Token" => csrf_token})
 
 db = PG::Connection.new(config['db'])
 
