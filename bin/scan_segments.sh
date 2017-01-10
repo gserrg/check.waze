@@ -6788,7 +6788,6 @@ psql -h 127.0.0.1 -d wazedb -U waze -c 'update segments set city_id = (select gi
 psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where city_id is null;'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where street_id in (select id from streets where city_id in (select id from cities where country_id <> 186 and country_id <> 37))'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'update segments set area_id = (select id from areas_mapraid where ST_Contains(geom, ST_SetSRID(ST_Point(segments.longitude, segments.latitude), 4326)) limit 1) where area_id is null'
-psql -h 127.0.0.1 -d wazedb -U waze -c 'update segments s1 set dc_density = (select count(*) from segments s2 where not s2.connected and s2.latitude between (s1.latitude - 0.01) and (s1.latitude + 0.01) and s2.longitude between (s1.longitude - 0.01) and (s1.longitude + 0.01)) where not s1.connected and s1.dc_density is null;'
 psql -h 127.0.0.1 -d wazedb -U waze -c "update updates set updated_at = current_timestamp where object = '$3';"
 psql -h 127.0.0.1 -d wazedb -U waze -c 'refresh materialized view vw_segments; refresh materialized view vw_streets;'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'vacuum analyze;'

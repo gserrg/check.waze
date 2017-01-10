@@ -3,14 +3,13 @@ return [
 	'disconnected' => [
 		'title' => '<span title="Или нет разрешенных поворотов">Сегменты не подсоединены</span>',
 		'sql' => [
-			'columns' => 's.street_id, s.dc_density',
+			'columns' => 's.street_id',
 			'where' => 'connected = false and roadtype NOT IN (18,10,5,19,16)',
 		],
 		'fields' => [
 			'' => 'c_link',
 			'Город' => 'c_title_city',
 			'Улица' => 'c_title_street',
-			'Вес' => 'dc_density',
 			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
