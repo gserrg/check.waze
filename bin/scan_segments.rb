@@ -26,7 +26,7 @@ LongLeste = ARGV[2].to_f
 LatSul = ARGV[3].to_f
 Passo = ARGV[4].to_f
 
-puts "Starting analysis on [#{LongOeste} #{LatNorte}] - [#{LongLeste} #{LatSul}]"
+# puts "Starting analysis on [#{LongOeste} #{LatNorte}] - [#{LongLeste} #{LatSul}]"
 
 config = YAML::load_file('../config/scanner.yaml')
 agent = Mechanize.new

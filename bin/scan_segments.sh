@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Start: $(date '+%d/%m/%Y %H:%M:%S')"
+echo "$(date '+%d/%m/%Y %H:%M:%S') start $1"
 case "$1" in
 # Республика Беларусь
   RB.RB)
@@ -6791,4 +6791,4 @@ psql -h 127.0.0.1 -d wazedb -U waze -c "update updates set updated_at = current_
 psql -h 127.0.0.1 -d wazedb -U waze -c 'refresh materialized view vw_segments; refresh materialized view vw_streets;'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'vacuum analyze;'
 
-echo "End exec: $(date '+%d/%m/%Y %H:%M:%S')"
+echo "$(date '+%d/%m/%Y %H:%M:%S') end scan $1"
