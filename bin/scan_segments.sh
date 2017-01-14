@@ -5,18 +5,18 @@ case "$1" in
 # Республика Беларусь
   RB.RB)
     ruby scan_segments.rb 27.50 56.16 29.48 55.87 0.09
-#    ruby scan_segments.rb 26.51 55.87 31.25 54.03 0.09
-#    ruby scan_segments.rb 23.80 54.03 31.90 52.08 0.09
-#    ruby scan_segments.rb 31.90 53.83 32.78 53.07 0.09
-#    ruby scan_segments.rb 26.15 55.19 26.50 54.03 0.09
-#    ruby scan_segments.rb 25.63 55.00 26.15 54.03 0.09
-#    ruby scan_segments.rb 24.75 54.30 25.63 54.03 0.09
-#    ruby scan_segments.rb 23.49 53.96 23.80 53.26 0.09
-#    ruby scan_segments.rb 23.15 52.63 23.80 52.08 0.09
-#    ruby scan_segments.rb 23.46 52.08 24.36 51.57 0.09
-#    ruby scan_segments.rb 24.36 52.08 27.20 51.74 0.09
-#    ruby scan_segments.rb 27.20 52.08 30.89 51.28 0.09
-#    ruby scan_segments.rb 31.25 54.24 31.90 54.03 0.09
+    ruby scan_segments.rb 26.51 55.87 31.25 54.03 0.09
+    ruby scan_segments.rb 23.80 54.03 31.90 52.08 0.09
+    ruby scan_segments.rb 31.90 53.83 32.78 53.07 0.09
+    ruby scan_segments.rb 26.15 55.19 26.50 54.03 0.09
+    ruby scan_segments.rb 25.63 55.00 26.15 54.03 0.09
+    ruby scan_segments.rb 24.75 54.30 25.63 54.03 0.09
+    ruby scan_segments.rb 23.49 53.96 23.80 53.26 0.09
+    ruby scan_segments.rb 23.15 52.63 23.80 52.08 0.09
+    ruby scan_segments.rb 23.46 52.08 24.36 51.57 0.09
+    ruby scan_segments.rb 24.36 52.08 27.20 51.74 0.09
+    ruby scan_segments.rb 27.20 52.08 30.89 51.28 0.09
+    ruby scan_segments.rb 31.25 54.24 31.90 54.03 0.09
   ;;
 # Республика Адыгея
   RU.AD)
@@ -6783,7 +6783,7 @@ case "$1" in
     echo "Sintax: scan_segments.sh <state abbreviation>"
     exit 1
 esac
-psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where street_id in (select id from streets where city_id in (select id from cities where country_id <> 186 and country_id <> 37))'
+psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where street_id in (select id from streets where city_id in (select id from cities where country_id not in (186, 37))'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'update segments set area_id = (select id from areas_mapraid where ST_Contains(geom, ST_SetSRID(ST_Point(segments.longitude, segments.latitude), 4326)) limit 1) where area_id is null'
 psql -h 127.0.0.1 -d wazedb -U waze -c "update updates set updated_at = current_timestamp where object = '$3';"
 psql -h 127.0.0.1 -d wazedb -U waze -c 'vacuum analyze;'
