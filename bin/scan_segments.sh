@@ -6783,7 +6783,7 @@ case "$1" in
     echo "Sintax: scan_segments.sh <state abbreviation>"
     exit 1
 esac
-psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where street_id in (select id from streets where city_id in (select id from cities where country_id not in (186, 37))'
+psql -h 127.0.0.1 -d wazedb -U waze -c 'delete from segments where street_id in (select id from streets where city_id in (select id from cities where country_id not in (186, 37)))'
 psql -h 127.0.0.1 -d wazedb -U waze -c 'update segments set area_id = (select id from areas_mapraid where ST_Contains(geom, ST_SetSRID(ST_Point(segments.longitude, segments.latitude), 4326)) limit 1) where area_id is null'
 psql -h 127.0.0.1 -d wazedb -U waze -c "update updates set updated_at = current_timestamp where object = '$3';"
 psql -h 127.0.0.1 -d wazedb -U waze -c 'vacuum analyze;'
