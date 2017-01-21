@@ -79,7 +79,7 @@ def busca(db,agent,longOeste,latNorte,longLeste,latSul,passo,exec)
         json['states']['objects'].each {|s| @states[s['id']] = "#{s['id']},\"#{s['name'].nil? ? s['name'] : s['name'][0..49]}\",#{s['countryID']}\n" if not @states.has_key?(s['id']) }
 
         # Get city names
-        json['cities']['objects'].each {|c| @cities[c['id']] = "#{c['id']},\"#{c['name'].nil? ? c['name'] : c['name'][0..99]}\",#{c['stateID']},#{c['isEmpty'] ? 'TRUE':'FALSE'},#{c['countryID']}\n" if not @cities.has_key?(c['id']) }
+        json['cities']['objects'].each {|c| @cities[c['id']] = "#{c['id']},\"#{c['name'].nil? ? c['name'] : c['name'][0..99].gsub('"', "'")}\",#{c['stateID']},#{c['isEmpty'] ? 'TRUE':'FALSE'},#{c['countryID']}\n" if not @cities.has_key?(c['id']) }
 
         # Get street names
         json['streets']['objects'].each {|s| @streets[s['id']] = "#{s['id']},\"#{s['name'].nil? ? s['name'] : s['name'][0..99]}\",#{s['cityID']},#{s['isEmpty'] ? 'TRUE' : 'FALSE' }\n" if not @streets.has_key?(s['id']) }
