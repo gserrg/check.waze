@@ -175,4 +175,18 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
+	'unpaved' => [
+		'title' => 'Важные дороги без покрытия',
+		'sql' => [
+			'where' => 'str.unpaved = TRUE AND roadtype in (3,6,7,2,4)',
+		],
+		'fields' => [
+			'' => 'c_link',
+			'Город' => 'c_title_city',
+			'Улица' => 'c_title_street',
+			'Тип дороги' => 'c_road_type',
+			'Обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
+	],
 ];
