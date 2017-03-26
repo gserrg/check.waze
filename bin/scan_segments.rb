@@ -88,7 +88,8 @@ def busca(db,agent,longOeste,latNorte,longLeste,latSul,passo,exec)
         json['segments']['objects'].each do |s|
           (longitude, latitude) = s['geometry']['coordinates'][(s['geometry']['coordinates'].size / 2)]
           connection = json['connections']["#{s['id']}f"] || json['connections']["#{s['id']}r"]
-          @segments[s['id']] = "#{s['id']},#{longitude},#{latitude},#{s['roadType']},#{s['level']},#{(s['lockRank'].nil? ? s['lockRank'] : s['lockRank'] + 1)},#{(s['updatedOn'].nil? ? s['createdBy'] : s['updatedBy'])},#{(s['updatedOn'].nil? ? Time.at(s['createdOn']/1000) : Time.at(s['updatedOn']/1000))},#{s['primaryStreetID']},#{s['length']},#{connection ? 'TRUE' : 'FALSE' },#{s['fwdDirection']},#{s['revDirection']},#{s['fwdMaxSpeed']},#{s['revMaxSpeed']},#{(s.has_key?('fwdMaxSpeedUnverified') ? s['fwdMaxSpeedUnverified'] : 'FALSE' )},#{(s.has_key?('revMaxSpeedUnverified') ? s['revMaxSpeedUnverified'] : 'FALSE' )},#{(s['junctionID'].nil? ? 'FALSE' : 'TRUE')},#{s['streetIDs'].size > 0}\n" if not @segments.has_key?(s['id'])
+          unpraved = (s['flags'] >> 4) & 1;
+          @segments[s['id']] = "#{s['id']},#{longitude},#{latitude},#{s['roadType']},#{s['level']},#{(s['lockRank'].nil? ? s['lockRank'] : s['lockRank'] + 1)},#{(s['updatedOn'].nil? ? s['createdBy'] : s['updatedBy'])},#{(s['updatedOn'].nil? ? Time.at(s['createdOn']/1000) : Time.at(s['updatedOn']/1000))},#{s['primaryStreetID']},#{s['length']},#{connection ? 'TRUE' : 'FALSE' },#{s['fwdDirection']},#{s['revDirection']},#{s['fwdMaxSpeed']},#{s['revMaxSpeed']},#{(s.has_key?('fwdMaxSpeedUnverified') ? s['fwdMaxSpeedUnverified'] : 'FALSE' )},#{(s.has_key?('revMaxSpeedUnverified') ? s['revMaxSpeedUnverified'] : 'FALSE' )},#{(s['junctionID'].nil? ? 'FALSE' : 'TRUE')},#{s['streetIDs'].size > 0},#{unpraved}\n" if not @segments.has_key?(s['id'])
         end
 
       rescue Mechanize::ResponseCodeError, NoMethodError
@@ -146,7 +147,7 @@ end
 db.exec('vacuum streets')
 
 db.exec("delete from segments where id in (#{@segments.keys.join(',')})") if @segments.size > 0
-db.copy_data('COPY segments (id, longitude, latitude, roadtype, level, lock, last_edit_by, last_edit_on, street_id, length, connected, fwddirection, revdirection, fwdmaxspeed, revmaxspeed, fwdmaxspeedunverified, revmaxspeedunverified, roundabout, alt_names) FROM STDIN CSV') do
+db.copy_data('COPY segments (id, longitude, latitude, roadtype, level, lock, last_edit_by, last_edit_on, street_id, length, connected, fwddirection, revdirection, fwdmaxspeed, revmaxspeed, fwdmaxspeedunverified, revmaxspeedunverified, roundabout, alt_names, unpraved) FROM STDIN CSV') do
   @segments.each_value {|s| db.put_copy_data s}
 end
 db.exec('vacuum segments')
