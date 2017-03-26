@@ -178,7 +178,7 @@ return [
 	'unpaved' => [
 		'title' => 'Важные дороги без покрытия',
 		'sql' => [
-			'where' => 'str.unpaved = TRUE AND roadtype in (3,6,7,2,4)',
+			'where' => 'unpaved = TRUE AND roadtype in (3,6,7,2,4)',
 		],
 		'fields' => [
 			'' => 'c_link',
