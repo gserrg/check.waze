@@ -202,4 +202,17 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
+	'4x4_no_city' => [
+		'title' => '4х4 вне НП',
+		'sql' => [
+			'where' => 'roadtype = 8 and c.isempty = TRUE',
+		],
+		'fields' => [
+			'' => 'c_link',
+			'Улица' => 'c_title_street',
+			'Тип дороги' => 'c_road_type',
+			'Обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
+	],
 ];
