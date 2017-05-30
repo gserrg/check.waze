@@ -210,7 +210,6 @@ return [
 		'fields' => [
 			'' => 'c_link',
 			'Улица' => 'c_title_street',
-			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
