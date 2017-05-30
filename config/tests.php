@@ -189,4 +189,17 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
+	'unpaved_no_city' => [
+		'title' => 'Дороги вне НП без покрытия',
+		'sql' => [
+			'where' => 'unpaved = TRUE and c.isempty = TRUE',
+		],
+		'fields' => [
+			'' => 'c_link',
+			'Улица' => 'c_title_street',
+			'Тип дороги' => 'c_road_type',
+			'Обновление' => 'last_edit_on',
+			'Редактор' => 'c_editor',
+		],
+	],
 ];
