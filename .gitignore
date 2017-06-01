@@ -2,3 +2,4 @@
 /config/db.php
 /config/git.php
 /config/scanner.yaml
+/vendor/

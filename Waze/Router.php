@@ -29,7 +29,7 @@ class Router
 			]);
 		}
 		if ($request == Config::get('git')) {
-			system('cd ..; git pull');
+			system('cd ..; git pull; composer install;');
 			header('HTTP/1.0 404 Not Found');
 			die;
 		}
