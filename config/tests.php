@@ -176,9 +176,10 @@ return [
 		],
 	],
 	'unpaved' => [
-		'title' => 'Важные дороги без покрытия',
+		'title' => 'Дороги без покрытия',
 		'sql' => [
-			'where' => 'unpaved = TRUE AND roadtype in (3,6,7,2,4)',
+			'where' => 'unpaved = TRUE',
+			'limit' => 10000,
 		],
 		'fields' => [
 			'' => 'c_link',
@@ -189,15 +190,16 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
-	'unpaved_no_city' => [
-		'title' => 'Дороги вне НП без покрытия',
+	'4x4_city' => [
+		'title' => '4х4 в НП',
 		'sql' => [
-			'where' => 'unpaved = TRUE and c.isempty = TRUE',
+			'where' => 'roadtype = 8 and c.isempty = False',
+			'limit' => 10000,
 		],
 		'fields' => [
 			'' => 'c_link',
+			'Город' => 'c_title_city',
 			'Улица' => 'c_title_street',
-			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
@@ -206,10 +208,13 @@ return [
 		'title' => '4х4 вне НП',
 		'sql' => [
 			'where' => 'roadtype = 8 and c.isempty = TRUE',
+			'limit' => 10000,
 		],
 		'fields' => [
 			'' => 'c_link',
+			'Город' => 'c_title_city',
 			'Улица' => 'c_title_street',
+			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
