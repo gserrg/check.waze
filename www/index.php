@@ -1,10 +1,6 @@
 <?php
 
-	function __autoload($class) {
-		$class = '../' . str_replace("\\", '/', $class) . '.php';
-		/** @noinspection PhpIncludeInspection */
-		require_once($class);
-	}
+	include('../vendor/autoload.php');
 
 	$controller = Waze\Router::process();
 	echo $controller->process();
