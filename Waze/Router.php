@@ -4,9 +4,11 @@ namespace Waze;
 
 class Router
 {
-	public static function process()
+	public static function process($request = null)
 	{
-		$request = $_SERVER['REQUEST_URI'];
+		if(is_null($request)) {
+			$request = $_SERVER['REQUEST_URI'];
+		}
 		if ($request == '/') {
 			return new Controllers\Index();
 		}
@@ -21,6 +23,9 @@ class Router
 		}
 		if ($request == '/boxer/') {
 			return new Controllers\Boxer(['flag' => 'boxer',]);
+		}
+		if ($request == '/boxer2/') {
+			return new Controllers\Boxer2();
 		}
 		if (preg_match('~^/boxer/(\w\w.\w\w)/$~', $request, $m)) {
 			return new Controllers\Boxer([
@@ -52,5 +57,4 @@ class Router
 		header('HTTP/1.0 404 Not Found');
 		die;
 	}
-
 }
