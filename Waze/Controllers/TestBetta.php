@@ -12,7 +12,7 @@ class TestBetta extends Controller
     {
         $area_code = strtoupper($this->params['area_code']);
         $area_name = DB::getInstance()->as_array("SELECT title as name FROM regions WHERE mnemocode = '{$area_code}'");
-        if(count($area_name) != 1) {
+        if (count($area_name) != 1) {
             return '';
         }
         $this->layout([

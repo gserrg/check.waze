@@ -6,7 +6,7 @@ class Router
 {
     public static function process($request = null)
     {
-        if(is_null($request)) {
+        if (is_null($request)) {
             $request = $_SERVER['REQUEST_URI'];
         }
         if ($request == '/') {
@@ -34,7 +34,8 @@ class Router
             ]);
         }
         if ($request == Config::get('git')) {
-            echo "<pre>"; system('cd ..; git pull 2>&1; composer update 2>&1;');
+            echo "<pre>";
+            system('cd ..; git pull 2>&1; composer update 2>&1;');
             header('HTTP/1.0 404 Not Found');
             die;
         }

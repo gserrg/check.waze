@@ -11,7 +11,7 @@ class Boxer extends Controller
     {
         $regions = Config::get('bbox');
         $coordinates = [];
-        if(isset($this->params['code'])) {
+        if (isset($this->params['code'])) {
             $boxes = $regions[strtoupper($this->params['code'])];
             foreach ($boxes as $box) {
                 $coordinates[] = implode(',', $box);

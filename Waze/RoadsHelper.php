@@ -1,4 +1,5 @@
 <?php
+
 namespace Waze;
 
 
@@ -56,7 +57,7 @@ class RoadsHelper extends Singleton
                 return '#без города' . " [{$data['st_name']}]";
             } else {
                 $name = $data['c_name'];
-                if(isset($_COOKIE['visible_region']) && $_COOKIE['visible_region'] == 'yes') {
+                if (isset($_COOKIE['visible_region']) && $_COOKIE['visible_region'] == 'yes') {
                     $name .= " [{$data['st_name']}]";
                 }
                 return $name;

@@ -23,7 +23,7 @@ class TestsFactory extends Singleton
         $render = '';
         foreach ($this->test as $test_name => $config) {
             if (isset($config['sql'], $config['fields'])) {
-                if(isset($this->params['betta']) && $this->params['betta']) {
+                if (isset($this->params['betta']) && $this->params['betta']) {
                     $list = $this->db->get_segments_betta($config['sql'], $area_id);
                 } else {
                     $list = $this->db->get_segments($config['sql'], $area_id);

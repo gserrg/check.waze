@@ -58,7 +58,7 @@ class Controller
 
     /**
      * @param array|string|null $name
-     * @param array             $params
+     * @param array $params
      */
     public function layout($name, $params = array())
     {

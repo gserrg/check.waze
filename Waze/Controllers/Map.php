@@ -53,16 +53,17 @@ class Map extends Controller
             $new_polygons = [];
             foreach ($points as $point) {
                 $new_pounts = explode(' ', $point);
-                if(is_array($new_pounts) && count($new_pounts) === 2) {
+                if (is_array($new_pounts) && count($new_pounts) === 2) {
                     $new_polygons[] = $new_pounts[1] . ', ' . $new_pounts[0];
                 }
             }
-            $out[] = '[' . implode('], [', $new_polygons) .']';
+            $out[] = '[' . implode('], [', $new_polygons) . ']';
         }
         return '[[' . implode('], [', $out) . ']]';
     }
 
-    private function titleColor($name) {
+    private function titleColor($name)
+    {
         $md5 = md5($name);
         return '#' . substr($md5, 0, 6);
     }

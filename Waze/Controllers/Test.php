@@ -12,7 +12,7 @@ class Test extends Controller
     {
         $area_id = $this->params['area_id'];
         $area_name = DB::getInstance()->as_array('SELECT areas_mapraid.name FROM areas_mapraid WHERE areas_mapraid.id = ' . $area_id);
-        if(count($area_name) != 1) {
+        if (count($area_name) != 1) {
             return '';
         }
         $this->layout([
