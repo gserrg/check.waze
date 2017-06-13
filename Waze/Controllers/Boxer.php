@@ -10,14 +10,16 @@ class Boxer extends Controller
 	public function process()
 	{
 		$regions = Config::get('bbox');
-		$boxes = $regions[strtoupper($this->params['code'])];
 		$coordinates = [];
-		foreach ($boxes as $box) {
-			$coordinates[] = implode(',', $box);
+		if(isset($this->params['code'])) {
+			$boxes = $regions[strtoupper($this->params['code'])];
+			foreach ($boxes as $box) {
+				$coordinates[] = implode(',', $box);
+			}
 		}
 		$this->layout([
 			'js' => [
-				'https://maps.googleapis.com/maps/api/js?key=AIzaSyCX9tzYywsfi6uB1KvBN3CGRl3e3S-QBtg&signed_in=true&callback=initMap' => 'async defer',
+				'https://maps.googleapis.com/maps/api/js?key=AIzaSyBgfstmpShj4ITypLWCLdmxnxUkvtC1PHM&signed_in=true&callback=initMap' => 'async defer',
 				'/builds/g-map.js' => '',
 			],
 			'css' => ['/builds/site.css' => '']

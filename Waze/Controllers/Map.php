@@ -53,7 +53,9 @@ class Map extends Controller
 			$new_polygons = [];
 			foreach ($points as $point) {
 				$new_pounts = explode(' ', $point);
-				$new_polygons[] = $new_pounts[1] . ', ' . $new_pounts[0];
+				if(is_array($new_pounts) && count($new_pounts) === 2) {
+					$new_polygons[] = $new_pounts[1] . ', ' . $new_pounts[0];
+				}
 			}
 			$out[] = '[' . implode('], [', $new_polygons) .']';
 		}

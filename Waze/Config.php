@@ -7,7 +7,7 @@ class Config
 	/**
 	 * @param string $name
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	public static function get($name)
 	{
