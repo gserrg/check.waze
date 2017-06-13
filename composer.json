@@ -1,7 +1,11 @@
 {
-  "require": {
-  },
-  "autoload": {
-    "psr-4": { "Waze\\": "Waze/" }
-  }
+    "require": {
+        "laravel/framework": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Waze\\": "Waze/"
+        }
+    }
 }
