@@ -34,9 +34,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::middleware('waze')->any('{any}', function(){
-            $controller = Waze\Router::process();
-            return $controller->process();
-        })->where('any', '.*');
+        Route::middleware('waze')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 }
