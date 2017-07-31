@@ -175,21 +175,6 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
-	'unpaved' => [
-		'title' => 'Дороги без покрытия',
-		'sql' => [
-			'where' => 'unpaved = TRUE',
-			'limit' => 10000,
-		],
-		'fields' => [
-			'' => 'c_link',
-			'Город' => 'c_title_city',
-			'Улица' => 'c_title_street',
-			'Тип дороги' => 'c_road_type',
-			'Обновление' => 'last_edit_on',
-			'Редактор' => 'c_editor',
-		],
-	],
 	'4x4_city' => [
 		'title' => '4х4 в НП',
 		'sql' => [
@@ -200,21 +185,6 @@ return [
 			'' => 'c_link',
 			'Город' => 'c_title_city',
 			'Улица' => 'c_title_street',
-			'Обновление' => 'last_edit_on',
-			'Редактор' => 'c_editor',
-		],
-	],
-	'4x4_no_city' => [
-		'title' => '4х4 вне НП',
-		'sql' => [
-			'where' => 'roadtype = 8 and c.isempty = TRUE',
-			'limit' => 10000,
-		],
-		'fields' => [
-			'' => 'c_link',
-			'Город' => 'c_title_city',
-			'Улица' => 'c_title_street',
-			'Тип дороги' => 'c_road_type',
 			'Обновление' => 'last_edit_on',
 			'Редактор' => 'c_editor',
 		],
