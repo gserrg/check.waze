@@ -175,11 +175,11 @@ return [
 			'Редактор' => 'c_editor',
 		],
 	],
-	'4x4_city' => [
-		'title' => '4х4 в НП',
+	'4x4' => [
+		'title' => '4х4',
 		'sql' => [
-			'where' => 'roadtype = 8 and c.isempty = False',
-			'limit' => 10000,
+			'where' => 'roadtype = 8',
+			'limit' => 3000,
 		],
 		'fields' => [
 			'' => 'c_link',

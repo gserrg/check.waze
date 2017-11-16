@@ -4,3 +4,4 @@
 /config/git.php
 /config/scanner.yaml
 /vendor/
+.idea/*
